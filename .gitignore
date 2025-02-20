@@ -1,0 +1,52 @@
+# compiled output
+/microservice-1-wp/dist
+/microservice-1-wp/node_modules
+/microservice-1-wp/build
+
+# Logs
+/microservice-1-wp/logs
+/microservice-1-wp/*.log
+/microservice-1-wp/npm-debug.log*
+/microservice-1-wp/pnpm-debug.log*
+/microservice-1-wp/yarn-debug.log*
+/microservice-1-wp/yarn-error.log*
+/microservice-1-wp/lerna-debug.log*
+
+# OS
+/microservice-1-wp/.DS_Store
+
+# Tests
+/microservice-1-wp/coverage
+/microservice-1-wp/.nyc_output
+
+# IDEs and editors
+/microservice-1-wp/.idea
+/microservice-1-wp/.project
+/microservice-1-wp/.classpath
+/microservice-1-wp/.c9/
+/microservice-1-wp/*.launch
+/microservice-1-wp/.settings/
+/microservice-1-wp/*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+
+# dotenv environment variable files
+/microservice-1-wp/.env
+/microservice-1-wp/.env.development.local
+/microservice-1-wp/.env.test.local
+/microservice-1-wp/.env.production.local
+/microservice-1-wp/.env.local
+
+# temp directory
+/microservice-1-wp/.temp
+/microservice-1-wp/.tmp
+
+# Runtime data
+/microservice-1-wp/pids
+/microservice-1-wp/*.pid
+/microservice-1-wp/*.seed
+/microservice-1-wp/*.pid.lock
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+/microservice-1-wp/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
