@@ -21,9 +21,9 @@ JWT_EXPIRES_IN=1d
 
 ## DUMMY
 
-### URI
+### CONTROLLER (EXAMPLE)
 
-http://localhost:3100/wp/register
+[POST] http://localhost:3100/wp/register
 body-raw
 
 ```
@@ -38,6 +38,23 @@ body-raw
     "kontak": "081311253777",
     "jenisusaha": "pegawai negeri",
     "kpp": "KPP Pratama Bantul",
+    "password": "1234r6"
+}
+```
+
+[GET] http://localhost:3100/wp/profile
+params
+
+```
+npwp:661231235543000
+```
+
+[POST] http://localhost:3100/auth/login
+body-raw
+
+```
+{
+    "npwp": "661231235543000",
     "password": "1234r6"
 }
 ```
