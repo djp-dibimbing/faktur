@@ -1,10 +1,9 @@
-import { IsEnum, IsOptional, IsString } from "class-validator";
-import { ReportStatus } from "../report-satatus.enum";
+import { IsOptional, IsString } from "class-validator";
 
 export class GetReportsFilterDto {
     @IsOptional()
-    @IsEnum(ReportStatus)
-    status?: ReportStatus;
+    @IsString()
+    npwp?: string;
 
     @IsOptional()
     @IsString()

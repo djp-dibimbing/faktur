@@ -1,5 +1,4 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { ReportStatus } from "../report-satatus.enum";
 
 @Entity()
 export class Report {
@@ -62,14 +61,5 @@ export class Report {
 
     @CreateDateColumn({ name: 'creation_date', type: 'timestamp'})
     creationDate: Date;
-
-    // @Column()
-    // title: string;
-
-    // @Column()
-    // description: string;
-
-    // @Column()
-    // status: ReportStatus;
     
 }
