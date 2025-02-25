@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { WpController } from './wp/wp.controller';
 import { WpModule } from './wp/wp.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize: true, // Pakai migration
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
     }),
+    AuthModule,
   ],
   controllers: [AppController, WpController],
   providers: [AppService],
