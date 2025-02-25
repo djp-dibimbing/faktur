@@ -2,14 +2,16 @@ import { Body, Controller, Delete, Get, Param, Patch, Post, Put, Query } from '@
 import { ReportsService } from './reports.service';
 import { CreateReportDto } from './dto/create-report.dto';
 import { Report } from './dto/report.entity';
+import { UpdateReportDto } from './dto/update-report.dto';
+import { GetReportsFilterDto } from './dto/get-reports-filter.dto';
 
 @Controller('reports')
 export class ReportController {
     constructor(private reportsService: ReportsService){}
 
-    @Get('getall')
-    getAll(){
-        return this.reportsService.getAllReports();
+    @Get()
+    getReports(@Query() filterDto: GetReportsFilterDto): Promise<Report[]> {
+        return this.reportsService.getReports(filterDto);
     }
 
     @Get('/:id')
@@ -25,6 +27,14 @@ export class ReportController {
     @Delete('/:id')
     deleteReport(@Param('id') id: string): Promise<void> {
         return this.reportsService.deleteReport(id);
+    }
+
+    @Patch('/:id')
+    updateReport(
+        @Param('id') id: string, 
+        @Body() updateReport: UpdateReportDto,
+    ): Promise<Report> {
+        return this.reportsService.updateReport(id, updateReport);
     }
 
     // @Get()

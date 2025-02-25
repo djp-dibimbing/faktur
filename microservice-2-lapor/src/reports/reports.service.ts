@@ -2,16 +2,16 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { ReportsRepository } from './reports.repository';
 import { Report } from './dto/report.entity';
 import { CreateReportDto } from './dto/create-report.dto';
-import { ReportStatus } from './report-satatus.enum';
-
+import { UpdateReportDto } from './dto/update-report.dto';
+import { GetReportsFilterDto } from './dto/get-reports-filter.dto';
 
 @Injectable()
 export class ReportsService {
 
     constructor(private readonly reportsRepository: ReportsRepository) {}
 
-    async getAllReports(): Promise<Report[]> {
-        return this.reportsRepository.find();
+    getReports(filterDto: GetReportsFilterDto): Promise<Report[]> {
+        return this.reportsRepository.getReports(filterDto);
     }
     
     async getReportById(id: string): Promise<Report> {
@@ -32,41 +32,14 @@ export class ReportsService {
         }
     }
 
-    
+    async updateReport(id: string, updateReportDto: UpdateReportDto): Promise<Report> {
+        const report = await this.getReportById(id);
 
-    // getTasksWithFilter(filterDto: GetTasksFilterDto): Task[] {
-    //     const { status, search } = filterDto;
-    //     let tasks = this.getAllTasks();
+        Object.assign(report, updateReportDto);
 
-    //     if(status) {
-    //         tasks = tasks.filter((task) => task.status === status);
-    //     }
+        await this.reportsRepository.save(report);
+        return report;
+    }
 
-    //     if (search) {
-    //         tasks = tasks.filter((tasks) => {
-    //             if (tasks.title.includes(search)  || tasks.description.includes(search)) {
-    //                 return true;
-    //             }
-    //             return false;
-    //         });
-    //     }
-
-    //     return tasks;
-    // }
-
-
-    // updateTaskStatus(id: string, status: TaskStatus): Task {
-    //     const task = this.getTaskById(id);
-
-    //     task.status = status;
-    //     return task;
-    // }
-
-    // updateTask(id: string): Task {
-    //     const task = this.getTaskById(id);
-
-    //     task.status = TaskStatus.IN_PROGRESS;
-    //     return task;
-    // }
 }
 
