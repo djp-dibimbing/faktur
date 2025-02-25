@@ -7,14 +7,24 @@ import { Report } from './dto/report.entity';
 export class ReportController {
     constructor(private reportsService: ReportsService){}
 
+    @Get('getall')
+    getAll(){
+        return this.reportsService.getAllReports();
+    }
+
     @Get('/:id')
-    getTaskById(@Param('id') id: string): Promise<Report> {
-        return this.reportsService.getTaskById(id);
+    getReportById(@Param('id') id: string): Promise<Report> {
+        return this.reportsService.getReportById(id);
     }
 
     @Post()
-    createTask(@Body() createReportDto: CreateReportDto ): Promise<Report>{
-        return this.reportsService.createTask(createReportDto);
+    createReport(@Body() createReportDto: CreateReportDto ): Promise<Report>{
+        return this.reportsService.createReport(createReportDto);
+    }
+
+    @Delete('/:id')
+    deleteReport(@Param('id') id: string): Promise<void> {
+        return this.reportsService.deleteReport(id);
     }
 
     // @Get()

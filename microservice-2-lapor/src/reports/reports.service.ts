@@ -10,30 +10,29 @@ export class ReportsService {
 
     constructor(private readonly reportsRepository: ReportsRepository) {}
 
-    async getTaskById(id: string): Promise<Report> {
+    async getAllReports(): Promise<Report[]> {
+        return this.reportsRepository.find();
+    }
+    
+    async getReportById(id: string): Promise<Report> {
         const found = await this.reportsRepository.findOne({ where: { id } });
         if (!found) throw new NotFoundException(`Report with ID "${id}" not found!`);
         return found;
     }
 
-    async createTask(createReportDto: CreateReportDto): Promise<Report> {
-
-        const {title, description} = createReportDto;
-
-        const report = this.reportsRepository.create({
-            title,
-            description,
-            status: ReportStatus.OPEN,
-        });
-
-        await this.reportsRepository.save(report);
-        return report;
+    createReport(createReportDto: CreateReportDto): Promise<Report> {
+        return this.reportsRepository.createReport(createReportDto);
     }
-    
 
-    // getAllTasks() {
-    //     return this.tasks;
-    // }
+    async deleteReport(id: string): Promise<void> {
+        const result = await this.reportsRepository.delete(id);
+
+        if (result.affected === 0) {
+            throw new NotFoundException(`Report with ID "${id}" not found`);
+        }
+    }
+
+    
 
     // getTasksWithFilter(filterDto: GetTasksFilterDto): Task[] {
     //     const { status, search } = filterDto;
@@ -55,26 +54,6 @@ export class ReportsService {
     //     return tasks;
     // }
 
-    // createTask(createTaskDto: CreateTaskDto): Task {
-
-    //     const {title, description} = createTaskDto;
-
-    //     const task: Task = {
-    //         id: uuidv4(),
-    //         title,
-    //         description,
-    //         status: TaskStatus.OPEN,
-    //     };
-
-    //     this.tasks.push(task);
-    //     return task;
-    // }
-
-    // deleteTask(id: string): void {
-    //     const found = this.getTaskById(id);
-
-    //     this.tasks = this.tasks.filter((task) => task.id !== id);
-    // }
 
     // updateTaskStatus(id: string, status: TaskStatus): Task {
     //     const task = this.getTaskById(id);
