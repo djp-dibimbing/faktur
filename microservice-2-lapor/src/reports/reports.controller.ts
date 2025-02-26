@@ -1,11 +1,14 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { ReportsService } from './reports.service';
 import { CreateReportDto } from './dto/create-report.dto';
 import { Report } from './dto/report.entity';
 import { UpdateReportDto } from './dto/update-report.dto';
 import { GetReportsFilterDto } from './dto/get-reports-filter.dto';
+import { AuthGuard } from '@nestjs/passport';
+
 
 @Controller('reports')
+@UseGuards(AuthGuard('jwt'))
 export class ReportController {
     constructor(private reportsService: ReportsService){}
 
@@ -62,11 +65,5 @@ export class ReportController {
     //     return this.tasksService.updateTaskStatus(id, status);
     // }
 
-    // @Patch('/:id')
-    // updateTask(
-    //     @Param('id') id: string, 
-    // ): Task {
-    //     return this.tasksService.updateTask(id);
-    // }
-    
+
 }
