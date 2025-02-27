@@ -17,6 +17,7 @@ DATABASE_PASSWORD=
 DATABASE_NAME=db_faktur
 JWT_SECRET=kelompok_faktur
 JWT_EXPIRES_IN=1d
+FRONTEND_URL=http://localhost:3500
 ```
 
 ## DUMMY
