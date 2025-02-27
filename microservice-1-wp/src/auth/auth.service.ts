@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { WpService } from 'src/wp/wp.service';
 import * as bcrypt from 'bcryptjs';
@@ -15,7 +19,7 @@ export class AuthService {
     if (wp && (await bcrypt.compare(password, wp.password))) {
       return wp;
     } else {
-      throw new BadRequestException('NPWP atau password salah');
+      throw new UnauthorizedException('NPWP atau password salah');
     }
   }
 
@@ -27,9 +31,7 @@ export class AuthService {
         access_token: this.jwtService.sign(payload),
       };
     } catch (error) {
-      return {
-        message: error.message,
-      };
+      throw new UnauthorizedException(error.message);
     }
   }
 
