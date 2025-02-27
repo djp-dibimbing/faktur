@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Put, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put, Query, UseGuards, Request} from '@nestjs/common';
 import { ReportsService } from './reports.service';
 import { CreateReportDto } from './dto/create-report.dto';
 import { Report } from './dto/report.entity';
@@ -13,8 +13,11 @@ export class ReportController {
     constructor(private reportsService: ReportsService){}
 
     @Get()
-    getReports(@Query() filterDto: GetReportsFilterDto): Promise<Report[]> {
-        return this.reportsService.getReports(filterDto);
+    async getReports(@Query() filterDto: GetReportsFilterDto): Promise<{data: Report[]}> {
+        const reports = await this.reportsService.getReports(filterDto);
+        return {
+            data: reports
+        }
     }
 
     @Get('/:id')
@@ -23,8 +26,14 @@ export class ReportController {
     }
 
     @Post()
-    createReport(@Body() createReportDto: CreateReportDto ): Promise<Report>{
-        return this.reportsService.createReport(createReportDto);
+    async createReport(@Request() req,
+    @Body() createReportDto: CreateReportDto ): Promise< {message: string, data: Report}>{
+        const npwp  = req.user.username;
+        const report = await this.reportsService.createReport(createReportDto, npwp );
+        return {
+            message: 'Laporan berhasil dibuat',
+            data: report
+        };
     }
 
     @Delete('/:id')
@@ -39,31 +48,5 @@ export class ReportController {
     ): Promise<Report> {
         return this.reportsService.updateReport(id, updateReport);
     }
-
-    // @Get()
-    // getTasks(@Query() filterDto: GetTasksFilterDto): Task[] {
-
-    //     if (Object.keys(filterDto).length){
-    //         return this.tasksService.getTasksWithFilter(filterDto);
-    //     } else {
-    //         return this.tasksService.getAllTasks();
-    //     }
-        
-    // }
-
-    // @Delete('/:id')
-    // deleteTask(@Param('id') id: string): void {
-    //     return this.tasksService.deleteTask(id);
-    // }
-
-    // @Patch('/:id/status')
-    // updateTaskStatus(
-    //     @Param('id') id: string, 
-    //     @Body() updateTaskStatusDto: UpdateTaskStatusDto,
-    // ): Task {
-    //     const { status } = updateTaskStatusDto;
-    //     return this.tasksService.updateTaskStatus(id, status);
-    // }
-
-
+    
 }

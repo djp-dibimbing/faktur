@@ -97,3 +97,23 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+
+
+{
+    "tahunPajak": "2024",
+    "pembetulan": 0,
+    "penghasilanBruto": 100000000,
+    "pengurang": 10000000,
+    "penghasilanNeto": 90000000,
+    "pkp": 36000000,
+    "pphTerutang": 1000000,
+    "kurangLebihBayar": 1000000,
+    "ntpn": "hgdf42425454424",
+    "status": 0,
+    "pphFinal": 0,
+    "pphFinalTerutang": 0,
+    "pengecualian": 0,
+    "harta": 500000000,
+    "utang":10000000
+}

@@ -20,8 +20,8 @@ export class ReportsService {
         return found;
     }
 
-    createReport(createReportDto: CreateReportDto): Promise<Report> {
-        return this.reportsRepository.createReport(createReportDto);
+    createReport(createReportDto: CreateReportDto, npwp: string ): Promise<Report> {
+        return this.reportsRepository.createReport(createReportDto, npwp);
     }
 
     async deleteReport(id: string): Promise<void> {

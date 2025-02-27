@@ -30,9 +30,9 @@ export class ReportsRepository extends Repository<Report> {
     return reports;
   }
 
-  async createReport(createReportDto: CreateReportDto): Promise<Report> {
+  async createReport(createReportDto: CreateReportDto, npwp: string): Promise<Report> {
  
-    const {npwp, tahunPajak,
+    const {tahunPajak,
       pembetulan,
       penghasilanBruto,
       pengurang,
@@ -50,9 +50,6 @@ export class ReportsRepository extends Repository<Report> {
       creationDate} = createReportDto;
 
     const report = this.create({
-        // title,
-        // description,
-        // status: ReportStatus.OPEN,
         npwp,
         tahunPajak,
         pembetulan,
