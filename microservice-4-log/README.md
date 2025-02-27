@@ -29,8 +29,19 @@ body-raw
 ```
 
 [GET] http://localhost:3400/history
+header
+
+```
+[{"key":"Authorization","value":"Bearer [token]"}]
+```
 
 [PUT] http://localhost:3400/history/[id]
+header
+
+```
+[{"key":"Authorization","value":"Bearer [token]"}]
+```
+
 body-raw
 
 ```
@@ -43,3 +54,8 @@ body-raw
 ```
 
 [DELETE] http://localhost:3400/history/[id]
+header
+
+```
+[{"key":"Authorization","value":"Bearer [token]"}]
+```

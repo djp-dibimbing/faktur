@@ -43,6 +43,12 @@ body-raw
 ```
 
 [GET] http://localhost:3100/wp/profile
+header
+
+```
+[{"key":"Authorization","value":"Bearer [token]"}]
+```
+
 params
 
 ```
