@@ -49,9 +49,12 @@ export default function Login() {
       <div className="min-h-screen flex items-center justify-center bg-indigo-900">
         <div className="bg-white p-8 rounded-lg shadow-lg w-96">
           <div className="flex items-center justify-center mb-3">
+            <Image src="/Logo_djp.png" alt="DJP Logo" width={50} height={50} className="mr-3" />
+          </div>
+          <div className="flex items-center justify-center mb-3">
             <h2 className="text-2xl font-semibold text-center text-yellow-400">Login</h2>
           </div>
-          <div className="flex items-center justify-center mb-6">
+          <div className="flex items-center justify-center mb-3">
             {formData.error && <div className="text-red-600 mb-3">{formData.error}</div>}
           </div>
           <form onSubmit={handleSubmit}>
