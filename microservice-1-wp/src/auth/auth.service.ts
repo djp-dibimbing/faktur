@@ -20,10 +20,17 @@ export class AuthService {
   }
 
   async login(wp: any) {
-    const payload = { npwp: wp.npwp, sub: wp.id };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
+    try {
+      const dataWp = await this.validateWp(wp.npwp, wp.password);
+      const payload = { npwp: dataWp.npwp, sub: dataWp.id };
+      return {
+        access_token: this.jwtService.sign(payload),
+      };
+    } catch (error) {
+      return {
+        message: error.message,
+      };
+    }
   }
 
   async validateToken(token: string) {

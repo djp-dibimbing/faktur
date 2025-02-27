@@ -1,6 +1,14 @@
-import { Body, Controller, Get, Post, Request } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
 import { WpService } from './wp.service';
 import { Wp } from './wp.entity';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('wp')
 export class WpController {
@@ -25,6 +33,7 @@ export class WpController {
   }
 
   @Get('profile')
+  @UseGuards(AuthGuard('jwt'))
   async getProfile(@Request() req) {
     const createdWp = await this.wpService.findByNpwp(req.npwp);
     if (!createdWp) {
