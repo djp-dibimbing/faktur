@@ -31,41 +31,10 @@ export class ReportsRepository extends Repository<Report> {
   }
 
   async createReport(createReportDto: CreateReportDto, npwp: string): Promise<Report> {
- 
-    const {tahunPajak,
-      pembetulan,
-      penghasilanBruto,
-      pengurang,
-      penghasilanNeto,
-      pkp,
-      pphTerutang,
-      kurangLebihBayar,
-      ntpn,
-      status,
-      pphFinal,
-      pphFinalTerutang,
-      pengecualian,
-      harta,
-      utang,
-      creationDate} = createReportDto;
 
     const report = this.create({
         npwp,
-        tahunPajak,
-        pembetulan,
-        penghasilanBruto,
-        pengurang,
-        penghasilanNeto,
-        pkp,
-        pphTerutang,
-        kurangLebihBayar,
-        ntpn,
-        status,
-        pphFinal,
-        pphFinalTerutang,
-        pengecualian,
-        harta,
-        utang,
+        ...createReportDto,
         creationDate: new Date(),
     });
 

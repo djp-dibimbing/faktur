@@ -2,8 +2,8 @@ import { IsNotEmpty, IsOptional } from "class-validator";
 
 export class CreateReportDto {
 
-    @IsOptional()
-    npwp: string;
+    // @IsOptional()
+    // npwp: string;
 
     @IsNotEmpty()
     tahunPajak: string;
@@ -51,5 +51,5 @@ export class CreateReportDto {
     utang: number;
 
     // @IsNotEmpty()
-    creationDate: Date;
+    // creationDate: Date;
 }
