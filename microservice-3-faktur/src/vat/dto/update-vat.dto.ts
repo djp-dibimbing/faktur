@@ -1,4 +1,4 @@
-import { IsNumber, IsOptional, IsString } from "class-validator";
+import { IsDate, IsOptional, IsString } from "class-validator";
 
 export class UpdateVatDto {
 
@@ -8,62 +8,18 @@ export class UpdateVatDto {
 
     @IsOptional()
     @IsString()
-    tahunPajak?: string;
+    kodeTransaksi?: string;
 
     @IsOptional()
-    @IsNumber()
-    pembetulan?: number;
-
-    @IsOptional()
-    @IsNumber()
-    penghasilanBruto?: number;
-
-    @IsOptional()
-    @IsNumber()
-    pengurang?: number;
-
-    @IsOptional()
-    @IsNumber()
-    penghasilanNeto?: number;
-
-    @IsOptional()
-    @IsNumber()
-    pkp?: number;
-
-    @IsOptional()
-    @IsNumber()
-    pphTerutang?: number;
-
-    @IsOptional()
-    @IsNumber()
-    kurangLebihBayar?: number;
+    @IsDate()
+    tanggalPembuatanFaktur?: Date;
 
     @IsOptional()
     @IsString()
-    ntpn?: string;
+    tinNikPembeli?: string;
 
     @IsOptional()
     @IsString()
-    status?: string;
-
-    @IsOptional()
-    @IsNumber()
-    pphFinal?: number;
-
-    @IsOptional()
-    @IsNumber()
-    pphFinalTerutang?: number;
-
-    @IsOptional()
-    @IsNumber()
-    pengecualian?: number;
-
-    @IsOptional()
-    @IsNumber()
-    harta?: number;
-
-    @IsOptional()
-    @IsNumber()
-    utang?: number;
+    nomorFaktur?: number;
     
 }

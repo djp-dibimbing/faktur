@@ -7,29 +7,29 @@ import { GetVatsFilterDto } from './dto/get-vats-filter.dto';
 import { AuthGuard } from '@nestjs/passport';
 
 
-@Controller('reports')
+@Controller('vats')
 @UseGuards(AuthGuard('jwt'))
 export class VatController {
     constructor(private vatsService: VatsService){}
 
     @Get()
-    async getReports(@Query() filterDto: GetVatsFilterDto): Promise<{data: Vat[]}> {
-        const vats = await this.vatsService.getReports(filterDto);
+    async getVats(@Query() filterDto: GetVatsFilterDto): Promise<{data: Vat[]}> {
+        const vats = await this.vatsService.getVats(filterDto);
         return {
             data: vats
         }
     }
 
     @Get('/:id')
-    getReportById(@Param('id') id: string): Promise<Vat> {
-        return this.vatsService.getReportById(id);
+    getVatById(@Param('id') id: string): Promise<Vat> {
+        return this.vatsService.getVatById(id);
     }
 
     @Post()
-    async createReport(@Request() req,
+    async createVat(@Request() req,
     @Body() createVatDto: CreateVatDto ): Promise< {message: string, data: Vat}>{
         const npwp  = req.user.username;
-        const vat = await this.vatsService.createReport(createVatDto, npwp );
+        const vat = await this.vatsService.createVat(createVatDto, npwp );
         return {
             message: 'Faktur berhasil dibuat',
             data: vat
@@ -37,16 +37,16 @@ export class VatController {
     }
 
     @Delete('/:id')
-    deleteReport(@Param('id') id: string): Promise<void> {
-        return this.vatsService.deleteReport(id);
+    deleteVat(@Param('id') id: string): Promise<void> {
+        return this.vatsService.deleteVat(id);
     }
 
     @Patch('/:id')
-    updateReport(
+    updateVat(
         @Param('id') id: string, 
         @Body() updateVat: UpdateVatDto,
     ): Promise<Vat> {
-        return this.vatsService.updateReport(id, updateVat);
+        return this.vatsService.updateVat(id, updateVat);
     }
     
 }

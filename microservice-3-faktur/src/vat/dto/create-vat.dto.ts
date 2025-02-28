@@ -2,54 +2,15 @@ import { IsNotEmpty, IsOptional } from "class-validator";
 
 export class CreateVatDto {
 
-    @IsOptional()
-    npwp: string;
+    @IsNotEmpty()
+    kodeTransaksi: string;
 
     @IsNotEmpty()
-    tahunPajak: string;
+    tanggalPembuatanFaktur: Date;
 
     @IsNotEmpty()
-    pembetulan: number;
+    tinNikPembeli: string;
 
-    @IsNotEmpty()
-    penghasilanBruto: number;
-
-    @IsNotEmpty()
-    pengurang: number;
-
-    @IsNotEmpty()
-    penghasilanNeto: number;
-
-    @IsNotEmpty()
-    pkp: number;
-
-    @IsNotEmpty()
-    pphTerutang: number;
-
-    @IsNotEmpty()
-    kurangLebihBayar: number;
-
-    @IsNotEmpty()
-    ntpn: string;
-
-    @IsNotEmpty()
-    status: string;
-
-    @IsNotEmpty()
-    pphFinal: number;
-
-    @IsNotEmpty()
-    pphFinalTerutang: number;
-
-    @IsNotEmpty()
-    pengecualian: number;
-
-    @IsNotEmpty()
-    harta: number;
-
-    @IsNotEmpty()
-    utang: number;
-
-    // @IsNotEmpty()
-    creationDate: Date;
+    // @IsOptional()
+    // nomorFaktur: string;
 }

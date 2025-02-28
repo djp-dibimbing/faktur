@@ -97,3 +97,18 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+DATABASE_HOST=localhost
+DATABASE_PORT=3306
+DATABASE_USER=root
+DATABASE_PASWORD=
+DATABASE_NAME=faktur
+JWT_SECRET=mysecretkey
+JWT_EXPIRES_IN=1d
+
+{
+    "kodeTransaksi": "10",
+    "tanggalPembuatanFaktur": "1988-10-01",
+    "tinNikPembeli": "55454s5fsdf4s54",
+    "nomorFaktur": "NO-1"
+}
