@@ -1,16 +1,16 @@
 import { DataSource, Repository } from "typeorm";
 import { Injectable } from "@nestjs/common";
-import { Report } from "./dto/report.entity";
-import { CreateReportDto } from "./dto/create-report.dto";
-import { GetReportsFilterDto } from "./dto/get-reports-filter.dto";
+import { Vat } from "./dto/vat.entity";
+import { CreateVatDto } from "./dto/create-vat.dto";
+import { GetVatsFilterDto } from "./dto/get-vats-filter.dto";
  
 @Injectable()
-export class ReportsRepository extends Repository<Report> {
+export class VatsRepository extends Repository<Vat> {
   constructor(private dataSource: DataSource) {
     super(Report, dataSource.createEntityManager());
   }
 
-  async getReports(filterDto: GetReportsFilterDto): Promise<Report[]>{
+  async getReports(filterDto: GetVatsFilterDto): Promise<Vat[]>{
     const { npwp, search } = filterDto;
 
     const query = this.createQueryBuilder('report');
@@ -30,7 +30,7 @@ export class ReportsRepository extends Repository<Report> {
     return reports;
   }
 
-  async createReport(createReportDto: CreateReportDto, npwp: string): Promise<Report> {
+  async createReport(createVatDto: CreateVatDto, npwp: string): Promise<Vat> {
  
     const {tahunPajak,
       pembetulan,
@@ -47,9 +47,9 @@ export class ReportsRepository extends Repository<Report> {
       pengecualian,
       harta,
       utang,
-      creationDate} = createReportDto;
+      creationDate} = createVatDto;
 
-    const report = this.create({
+    const vat = this.create({
         npwp,
         tahunPajak,
         pembetulan,
@@ -69,8 +69,8 @@ export class ReportsRepository extends Repository<Report> {
         creationDate: new Date(),
     });
 
-    await this.save(report);
-    return report;
+    await this.save(vat);
+    return vat;
   }
 
 }

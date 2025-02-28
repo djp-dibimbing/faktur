@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsOptional } from "class-validator";
 
-export class CreateReportDto {
+export class CreateVatDto {
 
     @IsOptional()
     npwp: string;
