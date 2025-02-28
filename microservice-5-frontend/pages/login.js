@@ -29,7 +29,7 @@ export default function Login() {
     const data = await response.json();
 
     if (response.ok) {
-      Cookies.set('access_token', data.access_token) // Simpan token ke cookies
+      Cookies.set('token', data.access_token) // Simpan token ke cookies
       router.push('/dashboard')
     } else {
       setFormData({
