@@ -109,6 +109,5 @@ JWT_EXPIRES_IN=1d
 {
     "kodeTransaksi": "10",
     "tanggalPembuatanFaktur": "1988-10-01",
-    "tinNikPembeli": "55454s5fsdf4s54",
-    "nomorFaktur": "NO-1"
+    "tinNikPembeli": "55454s5fsdf4s54"
 }
