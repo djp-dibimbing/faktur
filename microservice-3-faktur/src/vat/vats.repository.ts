@@ -30,11 +30,12 @@ export class VatsRepository extends Repository<Vat> {
     return vats;
   }
 
-  async createVat(createVatDto: CreateVatDto, npwp: string): Promise<Vat> {
+  async createVat(createVatDto: CreateVatDto, npwp: string, nomorFaktur: string): Promise<Vat> {
     
     const vat = this.create({
       npwp,
       ...createVatDto,
+      nomorFaktur,
     });
 
     await this.save(vat);

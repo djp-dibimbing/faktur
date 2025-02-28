@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { VatsModule } from './vat/vats.module';
+import { InvoiceCounterModule } from './nomor/invoice-counter.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { VatsModule } from './vat/vats.module';
       isGlobal: true,
     }),
     VatsModule,
+    InvoiceCounterModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DATABASE_HOST,
@@ -19,6 +21,7 @@ import { VatsModule } from './vat/vats.module';
       database: process.env.DATABASE_NAME,
       synchronize: false,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      autoLoadEntities: true,
     }),
   ],
   controllers: [AppController],
