@@ -30,7 +30,7 @@ MONGO_URI=mongodb://localhost:27017
 MONGO_DB_NAME=fakturdb
 JWT_SECRET=mysecretkey
 JWT_EXPIRES_IN=1d
-...
+```
 
 ## DUMMY
 
