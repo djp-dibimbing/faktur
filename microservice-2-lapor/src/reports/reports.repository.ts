@@ -42,4 +42,17 @@ export class ReportsRepository extends Repository<Report> {
     return report;
   }
 
+   async laporSpt(createReportDto: CreateReportDto, npwp: string, fileUrl: string): Promise<Report> {
+
+    const report = this.create({
+        npwp,
+        ...createReportDto,
+        creationDate: new Date(),
+        fileUrl,
+    });
+
+    await this.save(report);
+    return report;
+  }
+
 }

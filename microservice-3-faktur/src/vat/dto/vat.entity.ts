@@ -1,18 +1,19 @@
-import { Entity, CreateDateColumn, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, CreateDateColumn, Column, PrimaryColumn } from "typeorm";
+import { v4 as uuidv4 } from "uuid";
 
-@Entity()
+@Entity({ name: "vat" })
 export class Vat {
     
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+    @PrimaryColumn({ type: "uniqueidentifier", default: () => "NEWID()" })
+    id: string = uuidv4();
 
-    @Column()
+    @Column({ name: "npwp", type: "varchar", length: 20 })
     npwp: string;
 
     @Column({name: 'kode_transaksi' })
     kodeTransaksi: string;
 
-    @CreateDateColumn({ name: 'tanggal_pembuatan_faktur', type: 'timestamp'})
+    @CreateDateColumn({ name: "creation_date", type: "datetime2" })
     tanggalPembuatanFaktur: Date;
 
     @Column({ name: 'tin_nik_pembeli'})

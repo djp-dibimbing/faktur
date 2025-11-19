@@ -21,6 +21,9 @@ export class CreateReportDto {
     penghasilanNeto: number;
 
     @IsNotEmpty()
+    ptkp: number;
+
+    @IsNotEmpty()
     pkp: number;
 
     @IsNotEmpty()
@@ -34,6 +37,9 @@ export class CreateReportDto {
 
     @IsNotEmpty()
     status: string;
+
+    @IsNotEmpty()
+    jumlahBayar: number;
 
     @IsNotEmpty()
     pphFinal: number;
@@ -52,4 +58,7 @@ export class CreateReportDto {
 
     // @IsNotEmpty()
     // creationDate: Date;
+
+    // @IsNotEmpty()
+    // fileUrl: string;
 }

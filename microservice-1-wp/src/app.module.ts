@@ -12,14 +12,18 @@ import { AuthModule } from './auth/auth.module';
     WpModule,
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
-      type: 'mysql',
+      type: 'mssql',
       host: process.env.DATABASE_HOST,
-      port: Number(process.env.DATABASE_PORT),
+      port: Number(process.env.DATABASE_PORT) || 1434,
       username: process.env.DATABASE_USER,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
-      synchronize: true, // Pakai migration
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      synchronize: false,
+      options: {
+        encrypt: false, // penting untuk koneksi lokal
+        trustServerCertificate: true, // untuk development
+      },
     }),
     AuthModule,
   ],

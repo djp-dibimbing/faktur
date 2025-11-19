@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { InvoiceCounter } from "./dto/invoice-counter.dto";
+import { InvoiceCounter } from "./dto/invoice-counter.entity";
 import { InvoiceCounterRepository } from "./invoice-counter.repository";
 import { InvoiceCounterService } from "./invoice-counter.service";
 

@@ -98,6 +98,9 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
 
+
+## .env 
+
 DATABASE_HOST=localhost
 DATABASE_PORT=3306
 DATABASE_USER=root
@@ -105,6 +108,9 @@ DATABASE_PASWORD=
 DATABASE_NAME=faktur
 JWT_SECRET=mysecretkey
 JWT_EXPIRES_IN=1d
+
+
+## Create Faktur
 
 {
     "kodeTransaksi": "10",

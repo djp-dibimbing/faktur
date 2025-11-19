@@ -1,6 +1,6 @@
 import { Repository, DataSource } from "typeorm";
 import { Injectable } from "@nestjs/common";
-import { InvoiceCounter } from "./dto/invoice-counter.dto";
+import { InvoiceCounter } from "./dto/invoice-counter.entity";
 
 @Injectable()
 export class InvoiceCounterRepository extends Repository<InvoiceCounter> {

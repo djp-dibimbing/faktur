@@ -6,8 +6,10 @@ import { VatsRepository } from "./vats.repository";
 import { Vat } from "./dto/vat.entity";
 import { JwtStrategy } from "src/auth/jwt.strategy";
 import { InvoiceCounterModule } from "src/nomor/invoice-counter.module";
+import { FakturLogModule } from "src/mongo/faktur-log/faktur-log.module";
 @Module({
   imports: [
+    FakturLogModule,
     TypeOrmModule.forFeature([Vat]),
     InvoiceCounterModule,
   ],

@@ -11,7 +11,7 @@ export class UpdateReportDto {
     tahunPajak?: string;
 
     @IsOptional()
-    @IsNumber()
+    // @IsNumber()
     pembetulan?: number;
 
     @IsOptional()
@@ -65,5 +65,9 @@ export class UpdateReportDto {
     @IsOptional()
     @IsNumber()
     utang?: number;
+
+    @IsOptional()
+    @IsString()
+    fileUrl: string;
     
 }

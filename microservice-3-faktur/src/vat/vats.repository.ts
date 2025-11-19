@@ -3,11 +3,15 @@ import { Injectable } from "@nestjs/common";
 import { Vat } from "./dto/vat.entity";
 import { CreateVatDto } from "./dto/create-vat.dto";
 import { GetVatsFilterDto } from "./dto/get-vats-filter.dto";
+import { FakturLogService } from "src/mongo/faktur-log/faktur-log.service";
  
 @Injectable()
 export class VatsRepository extends Repository<Vat> {
-  constructor(private dataSource: DataSource) {
-    super(Vat, dataSource.createEntityManager());
+  constructor(
+    private readonly dataSource: DataSource,
+    private readonly fakturLogService: FakturLogService
+  ) {
+    super(Vat, dataSource.createEntityManager())
   }
 
   async getVats(filterDto: GetVatsFilterDto): Promise<Vat[]>{
@@ -37,6 +41,13 @@ export class VatsRepository extends Repository<Vat> {
       ...createVatDto,
       nomorFaktur,
     });
+
+    await this.fakturLogService.createLog({
+      fakturId: vat.id,
+      npwp: npwp,
+      nomorFaktur: vat.nomorFaktur,
+      action: 'created'
+    })
 
     await this.save(vat);
     return vat;
