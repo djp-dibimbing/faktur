@@ -1,7 +1,6 @@
 ## Compile and run the project
 
 ```bash
-# watch mode
 $ npm run start:dev
 ```
 
