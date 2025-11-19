@@ -18,7 +18,7 @@ DATABASE_NAME=db_faktur
 JWT_SECRET=kelompok_faktur
 JWT_EXPIRES_IN=1d
 FRONTEND_URL=http://localhost:3500
-```
+
 new env:
 DATABASE_TYPE=mssql
 DATABASE_HOST=localhost
@@ -30,6 +30,8 @@ MONGO_URI=mongodb://localhost:27017
 MONGO_DB_NAME=fakturdb
 JWT_SECRET=mysecretkey
 JWT_EXPIRES_IN=1d
+
+...
 
 ## DUMMY
 
