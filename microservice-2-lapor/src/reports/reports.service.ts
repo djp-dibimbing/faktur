@@ -67,6 +67,7 @@ export class ReportsService {
             fileUrl: fileUrl,
         });
 
+        // kirim event ke Kafka
         await this.kafkaService.send('lapor-spt', {
             id: report.id,
             npwp: npwp,

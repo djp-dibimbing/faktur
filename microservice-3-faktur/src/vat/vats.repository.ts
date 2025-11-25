@@ -4,12 +4,14 @@ import { Vat } from "./dto/vat.entity";
 import { CreateVatDto } from "./dto/create-vat.dto";
 import { GetVatsFilterDto } from "./dto/get-vats-filter.dto";
 import { FakturLogService } from "src/mongo/faktur-log/faktur-log.service";
+import { KafkaSevice } from "src/kafka/kafka.service";
  
 @Injectable()
 export class VatsRepository extends Repository<Vat> {
   constructor(
     private readonly dataSource: DataSource,
-    private readonly fakturLogService: FakturLogService
+    private readonly fakturLogService: FakturLogService,
+    private readonly kafkaService: KafkaSevice
   ) {
     super(Vat, dataSource.createEntityManager())
   }
@@ -48,6 +50,15 @@ export class VatsRepository extends Repository<Vat> {
       nomorFaktur: vat.nomorFaktur,
       action: 'created'
     })
+
+    await this.kafkaService.send('create-faktur', {
+      id: vat.id,
+      npwp: npwp,
+      nomorFaktur: nomorFaktur,
+      tanggalPembuatanFaktur: vat.tanggalPembuatanFaktur,
+      tinNik: vat.tinNikPembeli,
+      createdAt: new Date(),
+    });
 
     await this.save(vat);
     return vat;
