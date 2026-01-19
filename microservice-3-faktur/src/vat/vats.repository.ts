@@ -3,20 +3,18 @@ import { Injectable } from "@nestjs/common";
 import { Vat } from "./dto/vat.entity";
 import { CreateVatDto } from "./dto/create-vat.dto";
 import { GetVatsFilterDto } from "./dto/get-vats-filter.dto";
-import { FakturLogService } from "src/mongo/faktur-log/faktur-log.service";
-import { KafkaSevice } from "src/kafka/kafka.service";
+import { UpdateVatDto } from "./dto/update-vat.dto";
  
 @Injectable()
 export class VatsRepository extends Repository<Vat> {
+
   constructor(
     private readonly dataSource: DataSource,
-    private readonly fakturLogService: FakturLogService,
-    private readonly kafkaService: KafkaSevice
-  ) {
-    super(Vat, dataSource.createEntityManager())
+  ){
+    super(Vat, dataSource.createEntityManager());
   }
 
-  async getVats(filterDto: GetVatsFilterDto): Promise<Vat[]>{
+  async getVats(filterDto: GetVatsFilterDto): Promise<Vat[]> {
     const { npwp, search } = filterDto;
 
     const query = this.createQueryBuilder('vat');
@@ -27,41 +25,26 @@ export class VatsRepository extends Repository<Vat> {
 
     if (search) {
       query.andWhere(
-        'LOWER(vat.npwp) LIKE LOWER(:search) OR LOWER(vat.nomorFaktur) LIKE LOWER(:search)',
+        '(LOWER(vat.npwp) LIKE LOWER(:search) OR ' +
+        ' LOWER(vat.nomorFaktur) LIKE LOWER(:search))',
         { search: `%${search}%` },
       );
     }
 
-    const vats = await query.getMany();
-    return vats;
+    return await query.getMany();
   }
 
   async createVat(createVatDto: CreateVatDto, npwp: string, nomorFaktur: string): Promise<Vat> {
-    
-    const vat = this.create({
-      npwp,
-      ...createVatDto,
-      nomorFaktur,
+    return this.create({ 
+      npwp, 
+      nomorFaktur, 
+      ...createVatDto 
     });
+  }
 
-    await this.fakturLogService.createLog({
-      fakturId: vat.id,
-      npwp: npwp,
-      nomorFaktur: vat.nomorFaktur,
-      action: 'created'
-    })
-
-    await this.kafkaService.send('create-faktur', {
-      id: vat.id,
-      npwp: npwp,
-      nomorFaktur: nomorFaktur,
-      tanggalPembuatanFaktur: vat.tanggalPembuatanFaktur,
-      tinNik: vat.tinNikPembeli,
-      createdAt: new Date(),
-    });
-
-    await this.save(vat);
-    return vat;
+  async updateVat(vat: Vat, dto: UpdateVatDto): Promise<Vat> {
+    Object.assign(vat, dto);
+    return await this.save(vat);
   }
 
 }

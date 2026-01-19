@@ -42,11 +42,20 @@ export class VatController {
     }
 
     @Patch('/:id')
-    updateVat(
+    async updateVat(
         @Param('id') id: string, 
         @Body() updateVat: UpdateVatDto,
-    ): Promise<Vat> {
-        return this.vatsService.updateVat(id, updateVat);
+    ): Promise<{message: string, data: any}> {
+
+
+        const faktur = await this.vatsService.updateVat(id, updateVat);
+
+        return {
+            message: 'Faktur berhasil diperbaharui',
+            data: {
+                ...faktur,
+            },
+        };
     }
     
 }

@@ -14,4 +14,8 @@ export class FakturLogService {
     async createLog(data: any){
         return await this.fakturLogModel.create(data);
     }
+
+    async updateLog(data: any){
+        return await this.fakturLogModel.create(data)
+    }
 }
